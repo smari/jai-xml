@@ -257,27 +257,33 @@ for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags) #expand {
     `it_index := 0;
     cursor := node;
 
-    while true {
-        while true {
-            print("Cursor is at '%'\n", node);
-            print(" - '%'\n", <<node);
-            `it := cursor;
-            #insert body;
+    while outer := true {
+        `it := cursor;
 
-            if cursor.first_child == null { 
-                if cursor.next_sibling != null {
-                    cursor = cursor.next_sibling;
-                } else {
-                    cursor = null;
-                }
-                break;
-            }
+        #insert body;
+
+        `it_index += 1;
+
+        if cursor.first_child != null { 
             cursor = cursor.first_child;
-            `it_index += 1;
+            continue;
+        } else if cursor.next_sibling != null {
+            cursor = cursor.next_sibling;
+            continue;
         }
 
-        if cursor == null {
-            break;
+        while cursor.parent != null {
+            if cursor.parent == node {
+                // Break early if we're ascending above our starting point.
+                break outer;
+            } else if cursor.parent.next_sibling != null {
+                cursor = cursor.parent.next_sibling;
+                continue outer;
+            } else {
+                cursor = cursor.parent;
+            }
         }
+        break;
     }
+
 }
