@@ -13,7 +13,7 @@ main :: () {
         print("-🞂 % \n", args[1]);
         str := read_entire_file(args[1]);
         start_time := current_time_monotonic();
-        result, root := xml_parse(str);
+        root, result := xml_parse(str);
         end_time := current_time_monotonic();
         print("    % %\n", ifx result.status == .ok then "🟢" else "🔴", result.status);
         if result.status != .ok return;
@@ -33,16 +33,15 @@ main :: () {
         print(" 🟣 % ", file);
         str := read_entire_file(file);
         start_time := current_time_monotonic();
-        result, root, p := xml_parse(str,, testpool);
+        root, result := xml_parse(str,, testpool);
         end_time := current_time_monotonic();
         time_microseconds := to_microseconds(end_time-start_time);
         bandwidth := cast(float) str.count / to_nanoseconds(end_time-start_time);
         if result.status != .ok {
-            print("\r % % - % - % µs - % GB/s\n", ifx result.status == .ok then "🟢" else "🔴", file, result.status, time_microseconds, bandwidth);
+            using result;
+            print("\r % % - % - % µs - % GB/s\n", ifx status == .ok then "🟢" else "🔴", file, status, time_microseconds, bandwidth);
             failed += 1;
-            line, char := parse_get_location(p);
-            print(" - Error     : [%] % at %:%\n", p.status, p.error_message, line, char);
-            print(" - Next bytes: '%'\n", p.error_context);
+            print(" - Error     : [%] % at %:%\n", status, error_message, line, char);
         } else {
             print("\r");
             passed += 1;

@@ -24,26 +24,19 @@ To run the tests/benchmarks, compile `test.jai` and run. We don't distribute mos
 
 ## Example use
 
-```
-#import "JXML";
+See examples in the `examples/` directory.
 
-main :: () {
-    result, root := xml_parse("myfile.xml");
-    if result.status != .ok {
-        print("Problem with XML file: %\n", result.status);
-    }
+## Looping
 
-    for node:root {
-        print("Walking the XML file, depth first: %\n", <<node);
-    }
+While you can traverse the XML hierarchy manually, there are both callback-based walkers
+and a `for_expansion` defined. The for expansion allows you to run `for` on a node and it will walk its children, breadth first.
 
-    xml_free(root);
-}
-```
+Note: The depth-first callback walker will visit children in the reverse order of their parents. This may seem confusing, and should probably be changed, but it's the easiest way to implement this.
+
 
 ## Parsing functions:
- * `xml_parse :: (buffer: string) -> XMLParseResult, *XMLNode, *XMLParser`
- * `xml_parse_file :: (file: string) -> XMLParseResult, *XMLNode`
+ * `xml_parse :: (buffer: string) -> *XMLNode, XMLParseResult`
+ * `xml_parse_file :: (file: string) -> *XMLNode, XMLParseResult`
 
 ## Node functions:
  * `node_allocate :: inline () -> *XMLNode`
@@ -84,12 +77,13 @@ main :: () {
  * [ ] Add support for UTF-16
  * [ ] Improve speed of UTF-8 to UTF-32 conversion
  * [ ] Improve speed of Unicode character class matching
+ * [ ] Add XPath support
 
 # Authors
 
  * Smári McCarthy
 
- # License
+# License
 
  Copyright 2014 Smári McCarthy
 
