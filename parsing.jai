@@ -178,7 +178,6 @@ find_substring_sse3 :: (haystack: string, needle: string) -> index: int, found: 
 
 find_substring :: inline (haystack: string, needle: string) -> bool, int {
     #if USE_SIMD_STRING_SEARCH {
-        //print("Using SSE3\n");
         index, found := find_substring_sse3(haystack, needle);
     } else {
         index := find_index_from_left(haystack, needle);
