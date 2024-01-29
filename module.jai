@@ -2,8 +2,11 @@
 
 XMLParseResult :: struct {
     status    : XMLParseStatus;
-    offset    : string;
     encoding  : XMLEncoding;
+    remaining : string;
+    error_message : string;
+    line      : int;
+    char      : int;
 }
 
 
@@ -39,31 +42,38 @@ XMLParser :: struct {
     cursor      : *XMLNode;
 }
 
-xml_parse :: (buffer: string) -> XMLParseResult, *XMLNode, *XMLParser {
-    p := New(XMLParser);
+xml_parse :: (buffer: string) -> *XMLNode, XMLParseResult {
+    p : XMLParser;
     p.input = buffer;
     p.remaining = buffer;
 
-    parse_tree(p);
+    parse_tree(*p);
     res : XMLParseResult;
     res.status = p.status;
-    res.offset = p.remaining;
-    return res, p.root, p;
-}
+    res.remaining = p.remaining;
+    res.encoding = p.encoding;
+    res.error_message = p.error_message;
+    res.line, res.char = parse_get_location(*p);
+    return p.root, res;
+}   
 
-xml_parse_file :: (file: string) -> XMLParseResult, *XMLNode {
+xml_parse_file :: (file: string) -> *XMLNode, XMLParseResult {
     // TODO: Optimize this a bit.
     buf, success := read_entire_file(file);    
     if !success {
         pr : XMLParseResult;
         pr.status = .file_not_found;
-        return pr, null;
+        return null, pr;
     }
-    res, root := xml_parse(buf);
+    root, res := xml_parse(buf);
     free(buf);
-    return res, root;
+    return root, res;
 }
 
+
+xml_free :: (node: *XMLNode) {
+    node_free(node);
+}
 
 
 #scope_file
@@ -103,7 +113,6 @@ parse_tree :: (using p: *XMLParser) {
         if lexer_peek(p, "<!") {
                 // <!...
             if starts_with(remaining, "<!--") {
-                //performance_timer("parse_comment");
                 lexer_advance(p, 4);
                 s, found := lexer_accept_until(p, "-->");
                 if !found {
@@ -115,7 +124,6 @@ parse_tree :: (using p: *XMLParser) {
                 node_append(comment, cursor);
                 lexer_advance(p, 3);
             } else if starts_with(remaining, "<![CDATA[") {
-                //performance_timer("parse_cdata");
                 // TODO: This is very slow.
                 // CDATA!
                 lexer_advance(p, 9);
@@ -142,7 +150,6 @@ parse_tree :: (using p: *XMLParser) {
                 return;
             }
         } else if lexer_peek(p, "<?") {
-            //performance_timer("parse_processing_instruction");
             // <?...
             // This is a processing instruction
             lexer_advance(p, 2);
@@ -157,7 +164,6 @@ parse_tree :: (using p: *XMLParser) {
             node_append(pi, cursor);
 
         } else if lexer_peek(p, "</") {
-            //performance_timer("parse_closing_tag");
             // </...
             lexer_advance(p, 2);
             lexer_skip_whitespace(p);
@@ -185,7 +191,6 @@ parse_tree :: (using p: *XMLParser) {
 
         } else if remaining[0] == #char "<" {
             // other "<" -- probably a tag!
-            //performance_timer("parse_opening_tag");
             lexer_advance(p);
             name := lexer_accept_name(p);
             node_push(.element);
@@ -201,7 +206,6 @@ parse_tree :: (using p: *XMLParser) {
                 return;
             }
             {
-                //performance_timer("parse_pcdata");
                 node_push(.pcdata);
                 cursor.value = lexer_accept_until(p, #char "<");
                 node_pop();
@@ -234,7 +238,6 @@ parse_detect_encoding :: (using p: *XMLParser) {
 
 
 parse_attributes :: inline (using p: *XMLParser) {
-    //performance_timer("parse_attributes");
     // We've got other stuff in the tag.
     while true {
         lexer_skip_whitespace(p);
@@ -274,7 +277,6 @@ parse_attributes :: inline (using p: *XMLParser) {
 
 
 parse_prolog :: inline (using p: *XMLParser) #expand {
-    //performance_timer("parse_prolog");
     // Prolog is XMLDecl? Misc* (doctypedecl Misc*)?
     if remaining.count > 5 && starts_with(remaining, "<?xml") {
         lexer_advance(p, 5);
