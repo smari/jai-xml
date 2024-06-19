@@ -85,7 +85,7 @@ Note: The depth-first callback walker will visit children in the reverse order o
 
 # License
 
- Copyright 2014 Smári McCarthy
+ Copyright 2024 Smári McCarthy
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
