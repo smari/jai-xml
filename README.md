@@ -48,7 +48,7 @@ Note: The depth-first callback walker will visit children in the reverse order o
  * `node_insert_after :: (sibling: *XMLNode, node: *XMLNode)`
  * `node_insert_before :: (sibling: *XMLNode, node: *XMLNode)`
  * `node_remove :: (node: *XMLNode)`
- * `node_find_child_by_tag :: (node: *XMLNode, tag: string) -> *XMLNode`
+ * `node_find_child_by_tag :: (node: *XMLNode, tag: string, from: *XMLNode = null) -> *XMLNode`
  * `node_get_cdata :: (node: *XMLNode) -> string, bool`
 
 ## Attribute functions:

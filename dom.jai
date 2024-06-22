@@ -169,9 +169,20 @@ node_remove :: (node: *XMLNode) {
 }
 
 
-node_find_child_by_tag :: (node: *XMLNode, tag: string) -> *XMLNode {
-    // Returns first child node with the name tag.
-    cursor := node.first_child;
+node_find_child_by_tag :: (node: *XMLNode, tag: string, from: *XMLNode = null) -> *XMLNode {
+    // Returns first child node with the name tag, starting from node 'from' if one is given, else
+    // starting from the first child.
+    // Note: This only looks at immediate children, and not at deeper descendants.
+    cursor : *XMLNode;
+    if from == null {
+        cursor = node.first_child;
+    } else {
+        cursor = from.next_sibling;
+        if from.parent != node {
+            log("node_find_child_by_tag: 'from' node is not a child of 'node'");
+            return null;
+        }
+    }
     while true {
         if cursor == null return null;
         if cursor.name == tag return cursor;
