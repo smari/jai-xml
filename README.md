@@ -2,23 +2,29 @@
 
 This is an XML parser and DOM handling library for Jai.
 
+# Versions
+
+Rather than using version numbers that mean practically nothing, we'll just log the dates of changes.
+
+ * 2024-06-22: Some API updates, in particular `node_find_child_by_tag` now allows an optional `from` parameter. Minor parser improvements for some educations. Thanks to Nozdrum for suggestions. Tests: 3110, Passed: 2831, Failed: 279.
+ * 2024-01-29: Initial release. Tests: 3111, Pass: 2818, Fail: 293
 
 # Features and Speed
 
-Parses most XML correctly. Fails on certain rare `<!DOCTYPE>` declarations. Doesn't handle encodings other than UTF-8 and ASCII, except by accident.
+Parses most well formed XML correctly. Fails on certain rare `<!DOCTYPE>` declarations. Doesn't handle encodings other than UTF-8 and ASCII, except by accident.
 
-Benchmarked on a test suite based on the XML conformance tests, with 3111 tests, of which 90% pass. 
+Benchmarked on a test suite based on the XML conformance tests, with 3110 tests, of which 91% pass. 
 
-Average speed is 113µs per test.
+Average speed is 16.46µs per test.
 
 ```
-Runtime: 351301 µs.
-Passed: 2818 (90.5818%)
-Failed: 293 (9.4182%)
-Total : 3111
+Runtime: 51180 µs.
+Passed: 2831 (91.028938%)
+Failed: 279 (8.971061%)
+Total : 3110
 ```
 
-To run the tests/benchmarks, compile `test.jai` and run. We don't distribute most of the test data files, so use `test_data/fetch.sh` to fetch them.
+To run the tests/benchmarks, compile `test.jai` and run. Benchmark numbers obtained with `-release` flag. We don't distribute most of the test data files, so use `test_data/fetch.sh` to fetch them.
 
 # Documentation
 
