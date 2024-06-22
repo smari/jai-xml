@@ -384,7 +384,7 @@ parse_attribute :: inline (using p: *XMLParser) -> bool, string, string {
 
 #scope_export
 
-xml_write :: (node: *XMLNode) -> string {
+xml_write :: (node: *XMLNode, indent_str := "  ") -> string {
     s : String_Builder;
 
     write_attributes :: (node: *XMLNode, s: *String_Builder) {
@@ -396,41 +396,41 @@ xml_write :: (node: *XMLNode) -> string {
         }
     }
 
-    write_node :: (node: *XMLNode, s: *String_Builder, indent := 0) {
+    write_node :: (node: *XMLNode, s: *String_Builder, indent := 0, indent_str: string = "  ") {
         if !node return;
         if node.type == {
             case .element;
-                for 0..indent append(s, "  ");
+                for 0..indent append(s, indent_str);
                 append(s, tprint("<%", node.name));
                 write_attributes(node, s);
                 if node.flags & .Empty {
                     append(s, tprint("/>\n"));
                 } else {
                     append(s, tprint(">\n"));
-                    write_node(node.first_child, s, indent+1);
+                    write_node(node.first_child, s, indent+1, indent_str);
                     for 0..indent append(s, "  ");
                     append(s, tprint("</%>\n", node.name));
                 }
-                write_node(node.next_sibling, s, indent);
+                write_node(node.next_sibling, s, indent, indent_str);
 
             case .cdata; {
                 append(s, "<![CDATA[");
                 append(s, node.value);
                 append(s, "]]>");
-                write_node(node.next_sibling, s, indent);
+                write_node(node.next_sibling, s, indent, indent_str);
             }
             case .pcdata; {
-                for 0..indent append(s, "  ");
-                append(s, node.value);
-                append(s, "\n");
-                write_node(node.next_sibling, s, indent);
+                for 0..indent append(s, indent_str);
+		        append(s, node.value);
+		        append(s, "\n");
+                write_node(node.next_sibling, s, indent, indent_str);
             }
             case .comment; {
                 // Comment tag, i.e. '<!-- text -->'
                 append(s, "<!-- ");
                 append(s, node.value);
                 append(s, " -->");
-                write_node(node.next_sibling, s, indent);
+                write_node(node.next_sibling, s, indent, indent_str);
             }
             case .pi; {
                 // Processing instruction, i.e. '<?name?>'
@@ -440,19 +440,19 @@ xml_write :: (node: *XMLNode) -> string {
                 append(s, "<?xml ");
                 write_attributes(node, s);
                 append(s, "?>\n");
-                write_node(node.next_sibling, s, indent);
+                write_node(node.next_sibling, s, indent, indent_str);
             }
             case .doctype; {
                 // Document type declaration, i.e. '<!DOCTYPE doc>'
             }
             case .document; {
                 // Write preamble?
-                write_node(node.first_child, s, 0);
+                write_node(node.first_child, s, 0, indent_str);
             }
         }
     }
 
-    write_node(node, *s);
+    write_node(node, *s, indent_str=indent_str);
     return builder_to_string(*s);
 }
 

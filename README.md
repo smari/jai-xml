@@ -69,6 +69,9 @@ Note: The depth-first callback walker will visit children in the reverse order o
  * `xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback)`
  * `for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags)`
 
+## Writing functions:
+ * `xml_write :: (node: *XMLNode, indent_str := "  ") -> string`
+
 
 # TODO
 
