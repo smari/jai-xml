@@ -123,9 +123,10 @@ parse_tree :: (using p: *XMLParser) {
                 comment.value = copy_string(s);
                 node_append(comment, cursor);
                 lexer_advance(p, 3);
-            } else if starts_with(remaining, "<![CDATA[") {
+            } else if begins_with_nocase(remaining, "<![CDATA[") {
                 // TODO: This is very slow.
                 // CDATA!
+                // We'll accept not-well-formed CDATA sections, i.e. "CDATA" in any case.
                 lexer_advance(p, 9);
                 s, found := lexer_accept_until(p, "]]>");
                 if !found {
@@ -327,6 +328,8 @@ parse_doctype :: inline (using p: *XMLParser) {
         lexer_skip_whitespace(p);        
         systemliteral := lexer_accept_quoted_string(p);
     } else if starts_with(remaining, "PUBLIC") {
+        lexer_advance(p, 6);
+        lexer_skip_whitespace(p);
         pubid := lexer_accept_quoted_string(p);
         lexer_skip_whitespace(p);
         systemliteral := lexer_accept_quoted_string(p);
