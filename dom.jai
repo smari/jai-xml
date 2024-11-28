@@ -94,16 +94,18 @@ node_create :: (type: XMLNodeType) -> *XMLNode {
 }
 
 node_free :: (node: *XMLNode) {
-    for node {
-        if !node { continue; }
-        if node.name   free(node.name);
-        if node.value  free(node.value);
+    if node.first_child   node_free(node.first_child);
+    if node.next_sibling  node_free(node.next_sibling);
 
-        for node.attributes {
-            attribute_free(it);
-        }
-        free(node);
+    if node.name   free(node.name);
+    if node.value  free(node.value);
+
+    if node.attributes {
+        for node.attributes  attribute_free(it);
+        free(node.attributes.data);
     }
+
+    free(node);
 }
 
 
