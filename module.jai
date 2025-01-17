@@ -208,7 +208,8 @@ parse_tree :: (using p: *XMLParser) {
             }
             {
                 node_push(.pcdata);
-                cursor.value = lexer_accept_until(p, #char "<");
+                value := lexer_accept_until(p, #char "<");
+                cursor.value = copy_string(value);
                 node_pop();
             }
             continue;
