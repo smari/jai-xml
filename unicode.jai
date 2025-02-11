@@ -6,22 +6,21 @@ xml_is_digit :: (s: string) -> bool {
 }
 
 xml_is_digit :: (cp: u32) -> bool {
-    if (cp >= 0x0030 && cp <= 0x0039)
-    || (cp >= 0x0660 && cp <= 0x0669)
-    || (cp >= 0x06F0 && cp <= 0x06F9)
-    || (cp >= 0x0966 && cp <= 0x096F)
-    || (cp >= 0x09E6 && cp <= 0x09EF)
-    || (cp >= 0x0A66 && cp <= 0x0A6F) 
-    || (cp >= 0x0AE6 && cp <= 0x0AEF)
-    || (cp >= 0x0B66 && cp <= 0x0B6F)
-    || (cp >= 0x0BE7 && cp <= 0x0BEF) 
-    || (cp >= 0x0C66 && cp <= 0x0C6F)
-    || (cp >= 0x0CE6 && cp <= 0x0CEF)
-    || (cp >= 0x0D66 && cp <= 0x0D6F) 
-    || (cp >= 0x0E50 && cp <= 0x0E59)
-    || (cp >= 0x0ED0 && cp <= 0x0ED9)
-    || (cp >= 0x0F20 && cp <= 0x0F29)
-    then return true;
+    if (cp >= 0x0030 && cp <= 0x0039) return true;
+    if (cp >= 0x0660 && cp <= 0x0669) return true;
+    if (cp >= 0x06F0 && cp <= 0x06F9) return true;
+    if (cp >= 0x0966 && cp <= 0x096F) return true;
+    if (cp >= 0x09E6 && cp <= 0x09EF) return true;
+    if (cp >= 0x0A66 && cp <= 0x0A6F) return true; 
+    if (cp >= 0x0AE6 && cp <= 0x0AEF) return true;
+    if (cp >= 0x0B66 && cp <= 0x0B6F) return true;
+    if (cp >= 0x0BE7 && cp <= 0x0BEF) return true; 
+    if (cp >= 0x0C66 && cp <= 0x0C6F) return true;
+    if (cp >= 0x0CE6 && cp <= 0x0CEF) return true;
+    if (cp >= 0x0D66 && cp <= 0x0D6F) return true; 
+    if (cp >= 0x0E50 && cp <= 0x0E59) return true;
+    if (cp >= 0x0ED0 && cp <= 0x0ED9) return true;
+    if (cp >= 0x0F20 && cp <= 0x0F29) return true;
     return false;
 }
 
@@ -183,59 +182,58 @@ xml_is_basechar :: (cp: u32) -> bool {
     if (cp >= 0x30A1 && cp <= 0x30FA) return true;
     if (cp >= 0x3105 && cp <= 0x312C) return true;
     if (cp >= 0xAC00 && cp <= 0xD7A3) return true;
-    if (cp == 0x09B2)
-    || (cp == 0x0386) 
-    || (cp == 0x038C) 
-    || (cp == 0x03DA) 
-    || (cp == 0x03DC) 
-    || (cp == 0x03DE) 
-    || (cp == 0x03E0) 
-    || (cp == 0x0559) 
-    || (cp == 0x06D5) 
-    || (cp == 0x093D) 
-    || (cp == 0x0A5E) 
-    || (cp == 0x0A8D) 
-    || (cp == 0x0ABD) 
-    || (cp == 0x0AE0) 
-    || (cp == 0x0B3D) 
-    || (cp == 0x0B9C) 
-    || (cp == 0x0CDE) 
-    || (cp == 0x0E30) 
-    || (cp == 0x0E84) 
-    || (cp == 0x0E8A) 
-    || (cp == 0x0E8D) 
-    || (cp == 0x0EA5) 
-    || (cp == 0x0EA7) 
-    || (cp == 0x0EB0) 
-    || (cp == 0x0EBD) 
-    || (cp == 0x1100) 
-    || (cp == 0x1109) 
-    || (cp == 0x113C) 
-    || (cp == 0x113E) 
-    || (cp == 0x1140) 
-    || (cp == 0x114C) 
-    || (cp == 0x114E) 
-    || (cp == 0x1150) 
-    || (cp == 0x1159) 
-    || (cp == 0x1163) 
-    || (cp == 0x1165) 
-    || (cp == 0x1167) 
-    || (cp == 0x1169) 
-    || (cp == 0x1175) 
-    || (cp == 0x119E) 
-    || (cp == 0x11A8) 
-    || (cp == 0x11AB) 
-    || (cp == 0x11BA) 
-    || (cp == 0x11EB) 
-    || (cp == 0x11F0) 
-    || (cp == 0x11F9) 
-    || (cp == 0x1F59) 
-    || (cp == 0x1F5B) 
-    || (cp == 0x1F5D) 
-    || (cp == 0x1FBE) 
-    || (cp == 0x2126) 
-    || (cp == 0x212E)
-    then return true;
+    if (cp == 0x09B2) return true;
+    if (cp == 0x0386) return true; 
+    if (cp == 0x038C) return true; 
+    if (cp == 0x03DA) return true; 
+    if (cp == 0x03DC) return true; 
+    if (cp == 0x03DE) return true; 
+    if (cp == 0x03E0) return true; 
+    if (cp == 0x0559) return true; 
+    if (cp == 0x06D5) return true; 
+    if (cp == 0x093D) return true; 
+    if (cp == 0x0A5E) return true; 
+    if (cp == 0x0A8D) return true; 
+    if (cp == 0x0ABD) return true; 
+    if (cp == 0x0AE0) return true; 
+    if (cp == 0x0B3D) return true; 
+    if (cp == 0x0B9C) return true; 
+    if (cp == 0x0CDE) return true; 
+    if (cp == 0x0E30) return true; 
+    if (cp == 0x0E84) return true; 
+    if (cp == 0x0E8A) return true; 
+    if (cp == 0x0E8D) return true; 
+    if (cp == 0x0EA5) return true; 
+    if (cp == 0x0EA7) return true; 
+    if (cp == 0x0EB0) return true; 
+    if (cp == 0x0EBD) return true; 
+    if (cp == 0x1100) return true; 
+    if (cp == 0x1109) return true; 
+    if (cp == 0x113C) return true; 
+    if (cp == 0x113E) return true; 
+    if (cp == 0x1140) return true; 
+    if (cp == 0x114C) return true; 
+    if (cp == 0x114E) return true; 
+    if (cp == 0x1150) return true; 
+    if (cp == 0x1159) return true; 
+    if (cp == 0x1163) return true; 
+    if (cp == 0x1165) return true; 
+    if (cp == 0x1167) return true; 
+    if (cp == 0x1169) return true; 
+    if (cp == 0x1175) return true; 
+    if (cp == 0x119E) return true; 
+    if (cp == 0x11A8) return true; 
+    if (cp == 0x11AB) return true; 
+    if (cp == 0x11BA) return true; 
+    if (cp == 0x11EB) return true; 
+    if (cp == 0x11F0) return true; 
+    if (cp == 0x11F9) return true; 
+    if (cp == 0x1F59) return true; 
+    if (cp == 0x1F5B) return true; 
+    if (cp == 0x1F5D) return true; 
+    if (cp == 0x1FBE) return true; 
+    if (cp == 0x2126) return true; 
+    if (cp == 0x212E) return true;
 
     return false;
 }
@@ -247,10 +245,9 @@ xml_is_ideographic :: (s: string) -> bool {
 }
 
 xml_is_ideographic :: (cp: u32) -> bool {
-    if (cp >= 0x4E00 && cp <= 0x9FA5)
-    || (cp == 0x3007)
-    || (cp >= 0x3021 && cp <= 0x3029)
-    then return true;
+    if (cp >= 0x4E00 && cp <= 0x9FA5) return true;
+    if (cp == 0x3007) return true;
+    if (cp >= 0x3021 && cp <= 0x3029) return true;
     return false;
 }
 
@@ -287,11 +284,12 @@ xml_is_in :: (cp: u32, s: string) -> bool {
 }
 
 xml_is_namechar :: (cp: u32) -> bool {
-    return xml_is_letter(cp) 
-        || xml_is_digit(cp) 
-        || xml_is_in(cp, ".-_:")
-        || xml_is_combiningchar(cp)
-        || xml_is_extender(cp);
+    if xml_is_letter(cp)        return true;
+    if xml_is_digit(cp)         return true;
+    if xml_is_in(cp, ".-_:")    return true;
+    if xml_is_combiningchar(cp) return true;
+    if xml_is_extender(cp)      return true;
+    return false;
 }
 
 xml_is_namechar :: (s: string) -> bool {
