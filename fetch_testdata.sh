@@ -38,6 +38,11 @@ done
     cd xmlconf
     find . -name "*.dtd" -delete
     find . -name "*.ent" -delete
+    find . -name "*-ent" -delete
     find . -name "*.html" -delete
+    find . -name "*.css" -delete
+    find . -name "*.txt" -delete
+    find . -name "*.gif" -delete
+    find . -name "*.jpe" -delete
     echo " done"
 )
