@@ -34,8 +34,9 @@ See examples in the `examples/` directory.
 
 ## Looping
 
-While you can traverse the XML hierarchy manually, there are both callback-based walkers
-and a `for_expansion` defined. The for expansion allows you to run `for` on a node and it will walk its children, breadth first.
+While you can traverse the XML hierarchy manually, there are both callback-based walkers and a `for_expansion` defined. 
+
+The for expansion allows you to run `for` on a node and it will walk its children, depth first. Note that `continue` will continue the walk, but will *not* skip decent into the children of the current node. At some point it might be interesting to have an iterator where `continue` skips descent, but for now if you want to do this you'll have to roll your own.
 
 Note: The depth-first callback walker will visit children in the reverse order of their parents. This may seem confusing, and should probably be changed, but it's the easiest way to implement this.
 
@@ -81,7 +82,6 @@ Note: The depth-first callback walker will visit children in the reverse order o
 
 # TODO
 
- * [ ] Verify that free-methods are working right
  * [ ] Add support for ISO-8859
  * [ ] Add support for UTF-16
  * [ ] Improve speed of UTF-8 to UTF-32 conversion

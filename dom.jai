@@ -3,6 +3,9 @@
 XMLDocument :: struct {
     root       : *XMLNode;
     version    : string;
+    doctype    : string;
+    public_id  : string;
+    system_id  : string;
     encoding   : XMLEncoding;
     standalone : bool;
 }
@@ -19,7 +22,7 @@ XMLNodeType :: enum {
     doctype;     // Document type declaration, i.e. '<!DOCTYPE doc>'
 }
 
-XMLEncoding :: enum {
+XMLEncoding :: enum u8 {
     auto;
     utf8;
     utf16_le;
@@ -267,36 +270,32 @@ xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback) {
 for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags) #expand {
     #assert(flags == 0); // No flags supported yet.
 
-    `it_index := 0;
+    `it_index := -1;
     cursor := node;
+    `it : *XMLNode;
+    may_decend := true;
 
     while outer := true {
-        `it := cursor;
+        `it = cursor;
 
-        defer {
-            `it_index += 1;
-
-            if cursor.first_child != null { 
-                cursor = cursor.first_child;
-                continue;
-            } else if cursor.next_sibling != null {
-                cursor = cursor.next_sibling;
-                continue;
+        // We move the cursor ahead before iterating.
+        if cursor.first_child != null && may_decend { 
+            cursor = cursor.first_child;
+        } else if cursor.next_sibling != null {
+            cursor = cursor.next_sibling;
+            may_decend = true;
+        } else if cursor.parent.next_sibling != null {
+            cursor = cursor.parent.next_sibling;
+            may_decend = true;
+        } else {
+            cursor = cursor.parent;
+            if cursor.parent == node || cursor.parent == null {
+                break outer;
             }
-
-            while cursor.parent != null {
-                if cursor.parent == node {
-                    // Break early if we're ascending above our starting point.
-                    break outer;
-                } else if cursor.parent.next_sibling != null {
-                    cursor = cursor.parent.next_sibling;
-                    continue outer;
-                } else {
-                    cursor = cursor.parent;
-                }
-            }
-            break;
+            may_decend = false;
         }
+
+        `it_index += 1;
 
         #insert body;
     }
