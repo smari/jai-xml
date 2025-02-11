@@ -33,157 +33,157 @@ xml_is_basechar :: (s: string) -> bool {
 }
 
 xml_is_basechar :: (cp: u32) -> bool {
-    if (cp >= 0x0041 && cp <= 0x005A) 
-    || (cp >= 0x0061 && cp <= 0x007A) 
-    || (cp >= 0x00C0 && cp <= 0x00D6) 
-    || (cp >= 0x00D8 && cp <= 0x00F6) 
-    || (cp >= 0x00F8 && cp <= 0x00FF) 
-    || (cp >= 0x0100 && cp <= 0x0131) 
-    || (cp >= 0x0134 && cp <= 0x013E) 
-    || (cp >= 0x0141 && cp <= 0x0148) 
-    || (cp >= 0x014A && cp <= 0x017E) 
-    || (cp >= 0x0180 && cp <= 0x01C3) 
-    || (cp >= 0x01CD && cp <= 0x01F0) 
-    || (cp >= 0x01F4 && cp <= 0x01F5) 
-    || (cp >= 0x01FA && cp <= 0x0217) 
-    || (cp >= 0x0250 && cp <= 0x02A8) 
-    || (cp >= 0x02BB && cp <= 0x02C1) 
-    || (cp >= 0x0388 && cp <= 0x038A) 
-    || (cp >= 0x038E && cp <= 0x03A1) 
-    || (cp >= 0x03A3 && cp <= 0x03CE) 
-    || (cp >= 0x03D0 && cp <= 0x03D6) 
-    || (cp >= 0x03E2 && cp <= 0x03F3) 
-    || (cp >= 0x0401 && cp <= 0x040C) 
-    || (cp >= 0x040E && cp <= 0x044F) 
-    || (cp >= 0x0451 && cp <= 0x045C) 
-    || (cp >= 0x045E && cp <= 0x0481) 
-    || (cp >= 0x0490 && cp <= 0x04C4) 
-    || (cp >= 0x04C7 && cp <= 0x04C8) 
-    || (cp >= 0x04CB && cp <= 0x04CC) 
-    || (cp >= 0x04D0 && cp <= 0x04EB) 
-    || (cp >= 0x04EE && cp <= 0x04F5) 
-    || (cp >= 0x04F8 && cp <= 0x04F9) 
-    || (cp >= 0x0531 && cp <= 0x0556) 
-    || (cp >= 0x0561 && cp <= 0x0586) 
-    || (cp >= 0x05D0 && cp <= 0x05EA) 
-    || (cp >= 0x05F0 && cp <= 0x05F2) 
-    || (cp >= 0x0621 && cp <= 0x063A) 
-    || (cp >= 0x0641 && cp <= 0x064A) 
-    || (cp >= 0x0671 && cp <= 0x06B7) 
-    || (cp >= 0x06BA && cp <= 0x06BE) 
-    || (cp >= 0x06C0 && cp <= 0x06CE) 
-    || (cp >= 0x06D0 && cp <= 0x06D3) 
-    || (cp >= 0x06E5 && cp <= 0x06E6) 
-    || (cp >= 0x0905 && cp <= 0x0939) 
-    || (cp >= 0x0958 && cp <= 0x0961) 
-    || (cp >= 0x0985 && cp <= 0x098C) 
-    || (cp >= 0x098F && cp <= 0x0990) 
-    || (cp >= 0x0993 && cp <= 0x09A8) 
-    || (cp >= 0x09AA && cp <= 0x09B0) 
-    || (cp >= 0x09B6 && cp <= 0x09B9) 
-    || (cp >= 0x09DC && cp <= 0x09DD) 
-    || (cp >= 0x09DF && cp <= 0x09E1) 
-    || (cp >= 0x09F0 && cp <= 0x09F1) 
-    || (cp >= 0x0A05 && cp <= 0x0A0A) 
-    || (cp >= 0x0A0F && cp <= 0x0A10) 
-    || (cp >= 0x0A13 && cp <= 0x0A28) 
-    || (cp >= 0x0A2A && cp <= 0x0A30) 
-    || (cp >= 0x0A32 && cp <= 0x0A33) 
-    || (cp >= 0x0A35 && cp <= 0x0A36) 
-    || (cp >= 0x0A38 && cp <= 0x0A39) 
-    || (cp >= 0x0A59 && cp <= 0x0A5C) 
-    || (cp >= 0x0A72 && cp <= 0x0A74) 
-    || (cp >= 0x0A85 && cp <= 0x0A8B) 
-    || (cp >= 0x0A8F && cp <= 0x0A91) 
-    || (cp >= 0x0A93 && cp <= 0x0AA8) 
-    || (cp >= 0x0AAA && cp <= 0x0AB0) 
-    || (cp >= 0x0AB2 && cp <= 0x0AB3) 
-    || (cp >= 0x0AB5 && cp <= 0x0AB9) 
-    || (cp >= 0x0B05 && cp <= 0x0B0C) 
-    || (cp >= 0x0B0F && cp <= 0x0B10) 
-    || (cp >= 0x0B13 && cp <= 0x0B28) 
-    || (cp >= 0x0B2A && cp <= 0x0B30) 
-    || (cp >= 0x0B32 && cp <= 0x0B33) 
-    || (cp >= 0x0B36 && cp <= 0x0B39) 
-    || (cp >= 0x0B5C && cp <= 0x0B5D) 
-    || (cp >= 0x0B5F && cp <= 0x0B61) 
-    || (cp >= 0x0B85 && cp <= 0x0B8A) 
-    || (cp >= 0x0B8E && cp <= 0x0B90) 
-    || (cp >= 0x0B92 && cp <= 0x0B95) 
-    || (cp >= 0x0B99 && cp <= 0x0B9A) 
-    || (cp >= 0x0B9E && cp <= 0x0B9F) 
-    || (cp >= 0x0BA3 && cp <= 0x0BA4) 
-    || (cp >= 0x0BA8 && cp <= 0x0BAA) 
-    || (cp >= 0x0BAE && cp <= 0x0BB5) 
-    || (cp >= 0x0BB7 && cp <= 0x0BB9) 
-    || (cp >= 0x0C05 && cp <= 0x0C0C) 
-    || (cp >= 0x0C0E && cp <= 0x0C10) 
-    || (cp >= 0x0C12 && cp <= 0x0C28) 
-    || (cp >= 0x0C2A && cp <= 0x0C33) 
-    || (cp >= 0x0C35 && cp <= 0x0C39) 
-    || (cp >= 0x0C60 && cp <= 0x0C61) 
-    || (cp >= 0x0C85 && cp <= 0x0C8C) 
-    || (cp >= 0x0C8E && cp <= 0x0C90) 
-    || (cp >= 0x0C92 && cp <= 0x0CA8) 
-    || (cp >= 0x0CAA && cp <= 0x0CB3) 
-    || (cp >= 0x0CB5 && cp <= 0x0CB9) 
-    || (cp >= 0x0CE0 && cp <= 0x0CE1) 
-    || (cp >= 0x0D05 && cp <= 0x0D0C) 
-    || (cp >= 0x0D0E && cp <= 0x0D10) 
-    || (cp >= 0x0D12 && cp <= 0x0D28) 
-    || (cp >= 0x0D2A && cp <= 0x0D39) 
-    || (cp >= 0x0D60 && cp <= 0x0D61) 
-    || (cp >= 0x0E01 && cp <= 0x0E2E) 
-    || (cp >= 0x0E32 && cp <= 0x0E33) 
-    || (cp >= 0x0E40 && cp <= 0x0E45) 
-    || (cp >= 0x0E81 && cp <= 0x0E82) 
-    || (cp >= 0x0E87 && cp <= 0x0E88) 
-    || (cp >= 0x0E94 && cp <= 0x0E97) 
-    || (cp >= 0x0E99 && cp <= 0x0E9F) 
-    || (cp >= 0x0EA1 && cp <= 0x0EA3) 
-    || (cp >= 0x0EAA && cp <= 0x0EAB) 
-    || (cp >= 0x0EAD && cp <= 0x0EAE) 
-    || (cp >= 0x0EB2 && cp <= 0x0EB3) 
-    || (cp >= 0x0EC0 && cp <= 0x0EC4) 
-    || (cp >= 0x0F40 && cp <= 0x0F47) 
-    || (cp >= 0x0F49 && cp <= 0x0F69) 
-    || (cp >= 0x10A0 && cp <= 0x10C5) 
-    || (cp >= 0x10D0 && cp <= 0x10F6) 
-    || (cp >= 0x1102 && cp <= 0x1103) 
-    || (cp >= 0x1105 && cp <= 0x1107) 
-    || (cp >= 0x110B && cp <= 0x110C) 
-    || (cp >= 0x110E && cp <= 0x1112) 
-    || (cp >= 0x1154 && cp <= 0x1155) 
-    || (cp >= 0x115F && cp <= 0x1161) 
-    || (cp >= 0x116D && cp <= 0x116E) 
-    || (cp >= 0x1172 && cp <= 0x1173) 
-    || (cp >= 0x11AE && cp <= 0x11AF) 
-    || (cp >= 0x11B7 && cp <= 0x11B8) 
-    || (cp >= 0x11BC && cp <= 0x11C2) 
-    || (cp >= 0x1E00 && cp <= 0x1E9B) 
-    || (cp >= 0x1EA0 && cp <= 0x1EF9) 
-    || (cp >= 0x1F00 && cp <= 0x1F15) 
-    || (cp >= 0x1F18 && cp <= 0x1F1D) 
-    || (cp >= 0x1F20 && cp <= 0x1F45) 
-    || (cp >= 0x1F48 && cp <= 0x1F4D) 
-    || (cp >= 0x1F50 && cp <= 0x1F57) 
-    || (cp >= 0x1F5F && cp <= 0x1F7D) 
-    || (cp >= 0x1F80 && cp <= 0x1FB4) 
-    || (cp >= 0x1FB6 && cp <= 0x1FBC) 
-    || (cp >= 0x1FC2 && cp <= 0x1FC4) 
-    || (cp >= 0x1FC6 && cp <= 0x1FCC) 
-    || (cp >= 0x1FD0 && cp <= 0x1FD3) 
-    || (cp >= 0x1FD6 && cp <= 0x1FDB) 
-    || (cp >= 0x1FE0 && cp <= 0x1FEC) 
-    || (cp >= 0x1FF2 && cp <= 0x1FF4) 
-    || (cp >= 0x1FF6 && cp <= 0x1FFC) 
-    || (cp >= 0x212A && cp <= 0x212B) 
-    || (cp >= 0x2180 && cp <= 0x2182) 
-    || (cp >= 0x3041 && cp <= 0x3094) 
-    || (cp >= 0x30A1 && cp <= 0x30FA) 
-    || (cp >= 0x3105 && cp <= 0x312C) 
-    || (cp >= 0xAC00 && cp <= 0xD7A3)
-    || (cp == 0x09B2) 
+    if (cp >= 0x0041 && cp <= 0x005A) return true;
+    if (cp >= 0x0061 && cp <= 0x007A) return true;
+    if (cp >= 0x00C0 && cp <= 0x00D6) return true;
+    if (cp >= 0x00D8 && cp <= 0x00F6) return true;
+    if (cp >= 0x00F8 && cp <= 0x00FF) return true;
+    if (cp >= 0x0100 && cp <= 0x0131) return true;
+    if (cp >= 0x0134 && cp <= 0x013E) return true;
+    if (cp >= 0x0141 && cp <= 0x0148) return true;
+    if (cp >= 0x014A && cp <= 0x017E) return true;
+    if (cp >= 0x0180 && cp <= 0x01C3) return true;
+    if (cp >= 0x01CD && cp <= 0x01F0) return true;
+    if (cp >= 0x01F4 && cp <= 0x01F5) return true;
+    if (cp >= 0x01FA && cp <= 0x0217) return true;
+    if (cp >= 0x0250 && cp <= 0x02A8) return true;
+    if (cp >= 0x02BB && cp <= 0x02C1) return true;
+    if (cp >= 0x0388 && cp <= 0x038A) return true;
+    if (cp >= 0x038E && cp <= 0x03A1) return true;
+    if (cp >= 0x03A3 && cp <= 0x03CE) return true;
+    if (cp >= 0x03D0 && cp <= 0x03D6) return true;
+    if (cp >= 0x03E2 && cp <= 0x03F3) return true;
+    if (cp >= 0x0401 && cp <= 0x040C) return true;
+    if (cp >= 0x040E && cp <= 0x044F) return true;
+    if (cp >= 0x0451 && cp <= 0x045C) return true;
+    if (cp >= 0x045E && cp <= 0x0481) return true;
+    if (cp >= 0x0490 && cp <= 0x04C4) return true;
+    if (cp >= 0x04C7 && cp <= 0x04C8) return true;
+    if (cp >= 0x04CB && cp <= 0x04CC) return true;
+    if (cp >= 0x04D0 && cp <= 0x04EB) return true;
+    if (cp >= 0x04EE && cp <= 0x04F5) return true;
+    if (cp >= 0x04F8 && cp <= 0x04F9) return true;
+    if (cp >= 0x0531 && cp <= 0x0556) return true;
+    if (cp >= 0x0561 && cp <= 0x0586) return true;
+    if (cp >= 0x05D0 && cp <= 0x05EA) return true;
+    if (cp >= 0x05F0 && cp <= 0x05F2) return true;
+    if (cp >= 0x0621 && cp <= 0x063A) return true;
+    if (cp >= 0x0641 && cp <= 0x064A) return true;
+    if (cp >= 0x0671 && cp <= 0x06B7) return true;
+    if (cp >= 0x06BA && cp <= 0x06BE) return true;
+    if (cp >= 0x06C0 && cp <= 0x06CE) return true;
+    if (cp >= 0x06D0 && cp <= 0x06D3) return true;
+    if (cp >= 0x06E5 && cp <= 0x06E6) return true;
+    if (cp >= 0x0905 && cp <= 0x0939) return true;
+    if (cp >= 0x0958 && cp <= 0x0961) return true;
+    if (cp >= 0x0985 && cp <= 0x098C) return true;
+    if (cp >= 0x098F && cp <= 0x0990) return true;
+    if (cp >= 0x0993 && cp <= 0x09A8) return true;
+    if (cp >= 0x09AA && cp <= 0x09B0) return true;
+    if (cp >= 0x09B6 && cp <= 0x09B9) return true;
+    if (cp >= 0x09DC && cp <= 0x09DD) return true;
+    if (cp >= 0x09DF && cp <= 0x09E1) return true;
+    if (cp >= 0x09F0 && cp <= 0x09F1) return true;
+    if (cp >= 0x0A05 && cp <= 0x0A0A) return true;
+    if (cp >= 0x0A0F && cp <= 0x0A10) return true;
+    if (cp >= 0x0A13 && cp <= 0x0A28) return true;
+    if (cp >= 0x0A2A && cp <= 0x0A30) return true;
+    if (cp >= 0x0A32 && cp <= 0x0A33) return true;
+    if (cp >= 0x0A35 && cp <= 0x0A36) return true;
+    if (cp >= 0x0A38 && cp <= 0x0A39) return true;
+    if (cp >= 0x0A59 && cp <= 0x0A5C) return true;
+    if (cp >= 0x0A72 && cp <= 0x0A74) return true;
+    if (cp >= 0x0A85 && cp <= 0x0A8B) return true;
+    if (cp >= 0x0A8F && cp <= 0x0A91) return true;
+    if (cp >= 0x0A93 && cp <= 0x0AA8) return true;
+    if (cp >= 0x0AAA && cp <= 0x0AB0) return true;
+    if (cp >= 0x0AB2 && cp <= 0x0AB3) return true;
+    if (cp >= 0x0AB5 && cp <= 0x0AB9) return true;
+    if (cp >= 0x0B05 && cp <= 0x0B0C) return true;
+    if (cp >= 0x0B0F && cp <= 0x0B10) return true;
+    if (cp >= 0x0B13 && cp <= 0x0B28) return true;
+    if (cp >= 0x0B2A && cp <= 0x0B30) return true;
+    if (cp >= 0x0B32 && cp <= 0x0B33) return true;
+    if (cp >= 0x0B36 && cp <= 0x0B39) return true;
+    if (cp >= 0x0B5C && cp <= 0x0B5D) return true;
+    if (cp >= 0x0B5F && cp <= 0x0B61) return true;
+    if (cp >= 0x0B85 && cp <= 0x0B8A) return true;
+    if (cp >= 0x0B8E && cp <= 0x0B90) return true;
+    if (cp >= 0x0B92 && cp <= 0x0B95) return true;
+    if (cp >= 0x0B99 && cp <= 0x0B9A) return true;
+    if (cp >= 0x0B9E && cp <= 0x0B9F) return true;
+    if (cp >= 0x0BA3 && cp <= 0x0BA4) return true;
+    if (cp >= 0x0BA8 && cp <= 0x0BAA) return true;
+    if (cp >= 0x0BAE && cp <= 0x0BB5) return true;
+    if (cp >= 0x0BB7 && cp <= 0x0BB9) return true;
+    if (cp >= 0x0C05 && cp <= 0x0C0C) return true;
+    if (cp >= 0x0C0E && cp <= 0x0C10) return true;
+    if (cp >= 0x0C12 && cp <= 0x0C28) return true;
+    if (cp >= 0x0C2A && cp <= 0x0C33) return true;
+    if (cp >= 0x0C35 && cp <= 0x0C39) return true;
+    if (cp >= 0x0C60 && cp <= 0x0C61) return true;
+    if (cp >= 0x0C85 && cp <= 0x0C8C) return true;
+    if (cp >= 0x0C8E && cp <= 0x0C90) return true;
+    if (cp >= 0x0C92 && cp <= 0x0CA8) return true;
+    if (cp >= 0x0CAA && cp <= 0x0CB3) return true;
+    if (cp >= 0x0CB5 && cp <= 0x0CB9) return true;
+    if (cp >= 0x0CE0 && cp <= 0x0CE1) return true;
+    if (cp >= 0x0D05 && cp <= 0x0D0C) return true;
+    if (cp >= 0x0D0E && cp <= 0x0D10) return true;
+    if (cp >= 0x0D12 && cp <= 0x0D28) return true;
+    if (cp >= 0x0D2A && cp <= 0x0D39) return true;
+    if (cp >= 0x0D60 && cp <= 0x0D61) return true;
+    if (cp >= 0x0E01 && cp <= 0x0E2E) return true;
+    if (cp >= 0x0E32 && cp <= 0x0E33) return true;
+    if (cp >= 0x0E40 && cp <= 0x0E45) return true;
+    if (cp >= 0x0E81 && cp <= 0x0E82) return true;
+    if (cp >= 0x0E87 && cp <= 0x0E88) return true;
+    if (cp >= 0x0E94 && cp <= 0x0E97) return true;
+    if (cp >= 0x0E99 && cp <= 0x0E9F) return true;
+    if (cp >= 0x0EA1 && cp <= 0x0EA3) return true;
+    if (cp >= 0x0EAA && cp <= 0x0EAB) return true;
+    if (cp >= 0x0EAD && cp <= 0x0EAE) return true;
+    if (cp >= 0x0EB2 && cp <= 0x0EB3) return true;
+    if (cp >= 0x0EC0 && cp <= 0x0EC4) return true;
+    if (cp >= 0x0F40 && cp <= 0x0F47) return true;
+    if (cp >= 0x0F49 && cp <= 0x0F69) return true;
+    if (cp >= 0x10A0 && cp <= 0x10C5) return true;
+    if (cp >= 0x10D0 && cp <= 0x10F6) return true;
+    if (cp >= 0x1102 && cp <= 0x1103) return true;
+    if (cp >= 0x1105 && cp <= 0x1107) return true;
+    if (cp >= 0x110B && cp <= 0x110C) return true;
+    if (cp >= 0x110E && cp <= 0x1112) return true;
+    if (cp >= 0x1154 && cp <= 0x1155) return true;
+    if (cp >= 0x115F && cp <= 0x1161) return true;
+    if (cp >= 0x116D && cp <= 0x116E) return true;
+    if (cp >= 0x1172 && cp <= 0x1173) return true;
+    if (cp >= 0x11AE && cp <= 0x11AF) return true;
+    if (cp >= 0x11B7 && cp <= 0x11B8) return true;
+    if (cp >= 0x11BC && cp <= 0x11C2) return true;
+    if (cp >= 0x1E00 && cp <= 0x1E9B) return true;
+    if (cp >= 0x1EA0 && cp <= 0x1EF9) return true;
+    if (cp >= 0x1F00 && cp <= 0x1F15) return true;
+    if (cp >= 0x1F18 && cp <= 0x1F1D) return true;
+    if (cp >= 0x1F20 && cp <= 0x1F45) return true;
+    if (cp >= 0x1F48 && cp <= 0x1F4D) return true;
+    if (cp >= 0x1F50 && cp <= 0x1F57) return true;
+    if (cp >= 0x1F5F && cp <= 0x1F7D) return true;
+    if (cp >= 0x1F80 && cp <= 0x1FB4) return true;
+    if (cp >= 0x1FB6 && cp <= 0x1FBC) return true;
+    if (cp >= 0x1FC2 && cp <= 0x1FC4) return true;
+    if (cp >= 0x1FC6 && cp <= 0x1FCC) return true;
+    if (cp >= 0x1FD0 && cp <= 0x1FD3) return true;
+    if (cp >= 0x1FD6 && cp <= 0x1FDB) return true;
+    if (cp >= 0x1FE0 && cp <= 0x1FEC) return true;
+    if (cp >= 0x1FF2 && cp <= 0x1FF4) return true;
+    if (cp >= 0x1FF6 && cp <= 0x1FFC) return true;
+    if (cp >= 0x212A && cp <= 0x212B) return true;
+    if (cp >= 0x2180 && cp <= 0x2182) return true;
+    if (cp >= 0x3041 && cp <= 0x3094) return true;
+    if (cp >= 0x30A1 && cp <= 0x30FA) return true;
+    if (cp >= 0x3105 && cp <= 0x312C) return true;
+    if (cp >= 0xAC00 && cp <= 0xD7A3) return true;
+    if (cp == 0x09B2)
     || (cp == 0x0386) 
     || (cp == 0x038C) 
     || (cp == 0x03DA) 
