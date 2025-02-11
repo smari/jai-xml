@@ -6,6 +6,7 @@ This is an XML parser and DOM handling library for Jai.
 
 Rather than using version numbers that mean practically nothing, we'll just log the dates of changes.
 
+ * 2025-02-11: Fixed a few bugs in the for_expansion, and improved its documentation. Some other bugs had also been fixed in the interim. Thanks to valigo and caztanj for bug reports and fixes.
  * 2024-06-22: Some API updates, in particular `node_find_child_by_tag` now allows an optional `from` parameter. Minor parser improvements for some educations. Thanks to Nozdrum for suggestions. Tests: 3110, Passed: 2831, Failed: 279.
  * 2024-01-29: Initial release. Tests: 3111, Pass: 2818, Fail: 293
 
