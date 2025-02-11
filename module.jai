@@ -42,7 +42,7 @@ XMLParser :: struct {
     cursor      : *XMLNode;
 }
 
-xml_parse :: (buffer: string) -> *XMLNode, XMLParseResult {
+xml_parse :: (buffer: string, flags: ParserFlags = .Strict) -> *XMLNode, XMLParseResult {
     p : XMLParser;
     p.input = buffer;
     p.remaining = buffer;
@@ -190,6 +190,9 @@ parse_tree :: (using p: *XMLParser) {
             node_pop();
             continue;
 
+        } else if lexer_peek(p, "<%") {
+            lexer_accept_until(p, "%>");
+            continue;
         } else if remaining[0] == #char "<" {
             // other "<" -- probably a tag!
             lexer_advance(p);
@@ -202,7 +205,7 @@ parse_tree :: (using p: *XMLParser) {
         } else {
             if remaining.count == 0 break;
 
-            if cursor.type == .document {
+            if cursor.type == .document && p.flags & .Strict {
                 parse_error(p, .no_document_element, "Doesn't seem to be an XML file?");
                 return;
             }

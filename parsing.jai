@@ -1,4 +1,7 @@
 
+ParserFlags :: enum_flags u8 {
+    Strict;
+}
 
 Parser :: struct(Status: Type) {
     input           : string;
@@ -6,6 +9,7 @@ Parser :: struct(Status: Type) {
     status          : Status;
     error_message   : string;
     error_context   : string;
+    flags           : ParserFlags;
 }
 
 

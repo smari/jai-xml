@@ -13,7 +13,7 @@ main :: () {
         print("-🞂 % \n", args[1]);
         str := read_entire_file(args[1]);
         start_time := current_time_monotonic();
-        root, result := xml_parse(str);
+        root, result := xml_parse(str, 0);
         end_time := current_time_monotonic();
         print("    % %\n", ifx result.status == .ok then "🟢" else "🔴", result.status);
         if result.status != .ok return;
@@ -37,7 +37,10 @@ main :: () {
         end_time := current_time_monotonic();
         time_microseconds := to_microseconds(end_time-start_time);
         bandwidth := cast(float) str.count / to_nanoseconds(end_time-start_time);
-        if result.status != .ok {
+        supposed_to_fail := false;
+        if contains(file, "fail") || contains(file, "not-wf") then supposed_to_fail = true;
+
+        if result.status != .ok && !supposed_to_fail {
             using result;
             print("\r % % - % - % µs - % GB/s\n", ifx status == .ok then "🟢" else "🔴", file, status, time_microseconds, bandwidth);
             failed += 1;
