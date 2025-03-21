@@ -40,6 +40,8 @@ While you can traverse the XML hierarchy manually, there are both callback-based
 
 The for expansion allows you to run `for` on a node and it will walk its children, depth first. Note that `continue` will continue the walk, but will *not* skip decent into the children of the current node. At some point it might be interesting to have an iterator where `continue` skips descent, but for now if you want to do this you'll have to roll your own.
 
+`XMLNodeWalkCallback` functions should return `.Continue` to continue, `.Break` to stop descending, or either `.OnlyChildren` or `.OnlySiblings` to only continue to recurse children or siblings respectively. There is currently no mechanism to stop all iteration on the `xml_walk_depthfirst` or `xml_walk_breadthfirst` functions.
+
 Note: The depth-first callback walker will visit children in the reverse order of their parents. This may seem confusing, and should probably be changed, but it's the easiest way to implement this.
 
 
@@ -78,10 +80,6 @@ Note: The depth-first callback walker will visit children in the reverse order o
  * `xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback)`
  * `for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags)`
  
-Note that `XMLNodeWalkCallback` functions should return `.Continue` to continue, `.Break` to stop descending, or
-either `.OnlyChildren` or `.OnlySiblings` to only continue to recurse children or siblings respectively. There is
-currently no mechanism to stop all iteration on the `xml_walk_depthfirst` or `xml_walk_breadthfirst` functions.
-
 ## Writing functions:
  * `xml_write :: (node: *XMLNode, indent_str := "  ") -> string`
 
