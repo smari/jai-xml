@@ -250,21 +250,31 @@ attribute_append_new :: (node: *XMLNode) -> *XMLAttribute {
     return attr;
 }
 
-
-XMLNodeWalkCallback :: #type (node: *XMLNode);
-
-xml_walk_depthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback) {
-    if node == null return;
-    callback(node);
-    xml_walk_depthfirst(node.first_child, callback);
-    xml_walk_depthfirst(node.next_sibling, callback);
+XMLNodeWalkResult :: enum {
+    Continue;
+    Break;
+    OnlyChildren;
+    OnlySiblings;
 }
 
-xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback) {
+XMLNodeWalkCallback :: #type (node: *XMLNode, userdata: *void) -> XMLNodeWalkResult;
+
+xml_walk_depthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback, userdata: *void = null) {
     if node == null return;
-    callback(node);
-    xml_walk_breadthfirst(node.next_sibling, callback);
-    xml_walk_breadthfirst(node.first_child, callback);
+    result := callback(node, userdata);
+    if result == .Break return;
+
+    if result != .OnlySiblings then xml_walk_depthfirst(node.first_child, callback, userdata);
+    if result != .OnlyChildren then xml_walk_depthfirst(node.next_sibling, callback, userdata);
+}
+
+xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback, userdata: *void = null) {
+    if node == null return;
+    result := callback(node, userdata);
+    if result == .Break return;
+
+    if result != .OnlyChildren then xml_walk_breadthfirst(node.next_sibling, callback, userdata);
+    if result != .OnlySiblings then xml_walk_breadthfirst(node.first_child, callback, userdata);
 }
 
 for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags) #expand {
@@ -272,11 +282,10 @@ for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags) #expand {
 
     `it_index := -1;
     cursor := node;
-    `it : *XMLNode;
     may_decend := true;
 
     while outer := true {
-        `it = cursor;
+        `it := cursor;
 
         // We move the cursor ahead before iterating.
         if cursor.first_child != null && may_decend { 

@@ -8,7 +8,7 @@ main :: () {
         return;
     }
 
-    print("Walking the XML file, depth first:\n");
+    print("Walking the XML file using for_expansion, depth first:\n");
     for node:root {
         print("<%:% {% attrs}>\n", 
                 node.type, node.name, node.attributes.count);

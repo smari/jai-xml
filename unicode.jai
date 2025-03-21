@@ -34,12 +34,12 @@ xml_is_basechar :: (s: string) -> bool {
 xml_is_basechar :: (cp: u32) -> bool {
     if (cp >= 0x0041 && cp <= 0x005A) return true;
     if (cp >= 0x0061 && cp <= 0x007A) return true;
-    if (cp >= 0x00C0 && cp <= 0x00D6) return true;
-    if (cp >= 0x00D8 && cp <= 0x00F6) return true;
-    if (cp >= 0x00F8 && cp <= 0x00FF) return true;
-    if (cp >= 0x0100 && cp <= 0x0131) return true;
-    if (cp >= 0x0134 && cp <= 0x013E) return true;
-    if (cp >= 0x0141 && cp <= 0x0148) return true;
+    if (cp >= 0x00C0 && cp <= 0x00D6) return true; // Not 0x00D7
+    if (cp >= 0x00D8 && cp <= 0x00F6) return true; // Not 0x00F7
+    if (cp >= 0x00F8 && cp <= 0x00FF) return true; // Contiguous with the next range
+    if (cp >= 0x0100 && cp <= 0x0131) return true; // Not 0x0132 or 0x0133
+    if (cp >= 0x0134 && cp <= 0x013E) return true; // Not 0x013F or 0x0140
+    if (cp >= 0x0141 && cp <= 0x0148) return true; // Not 0x0149
     if (cp >= 0x014A && cp <= 0x017E) return true;
     if (cp >= 0x0180 && cp <= 0x01C3) return true;
     if (cp >= 0x01CD && cp <= 0x01F0) return true;

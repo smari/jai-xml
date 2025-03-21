@@ -31,7 +31,7 @@ perf_report :: () -> string {
     for 0..total_performance_timers-1 {
         pt := performance_timers[it];
         percent := to_milliseconds(pt.total_time) * 100 / to_milliseconds(total_runtime);
-        append(*buf, tprint("  %  : % µs (% %%) over % calls", 
+        append(*buf, tprint("  %  : % µs (% \%) over % calls", 
             ifx pt.name then pt.name else "???", 
             to_microseconds(pt.total_time), percent, pt.total_calls,
         ));

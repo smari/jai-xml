@@ -1,8 +1,9 @@
 #import,file "../module.jai";
 #import "Basic";
 
-callback :: (node: *XMLNode) {
+callback :: (node: *XMLNode, userdata : *void = null) -> XMLNodeWalkResult {
     print("<%:% {% attrs}>\n", node.type, node.name, node.attributes.count);
+    return .Continue;
 }
 
 main :: () {

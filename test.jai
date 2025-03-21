@@ -58,8 +58,8 @@ main :: () {
     print_perf_report();
 
     total := passed+failed;
-    print("Passed: % (%2%%)\n", passed, formatFloat(100*passed/cast(float)total, 2));
-    print("Failed: % (%2%%)\n", failed, formatFloat(100*failed/cast(float)total, 2));
+    print("Passed: % (%2\%)\n", passed, formatFloat(100*passed/cast(float)total, 2));
+    print("Failed: % (%2\%)\n", failed, formatFloat(100*failed/cast(float)total, 2));
     print("Total : %\n", total);
 }
 

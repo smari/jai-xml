@@ -4,6 +4,12 @@
       <baz>Bloop</baz>
    </bar>
    <bloop>
+     <aargh>
+       <fail/>
+     </aargh>
+     <aargh>
+       <succeed/>
+     </aargh>
    </bloop>
    <more>
      <stuff quotient="16"/>

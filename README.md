@@ -6,6 +6,7 @@ This is an XML parser and DOM handling library for Jai.
 
 Rather than using version numbers that mean practically nothing, we'll just log the dates of changes.
 
+ * 2025-03-21: Updates for Jai 0.2.010, including %% -> \% in prints. Fixed bug in `for_expansion`. Resolved feature request [#4](https://github.com/smari/jai-xml/issues/4) on user data and stop condition for walk callbacks, thanks again valigo. Note: This changes the signature for `XMLNodeWalkCallback`, which can break your builds. Sorry about that. If this broke your build, please let me know, because I have no idea how many users this library has, so I don't know how important API stability is. In the future breaking changes will be made very carefully and incrementally, or avoided altogther. No changes to test coverage.
  * 2025-02-11: Fixed a few bugs in the for_expansion, and improved its documentation. Some other bugs had also been fixed in the interim. Thanks to valigo and caztanj for bug reports and fixes. Also updated parser and tests a bit. Now test results are: Passed: 3066 (98.935143%), Failed: 33 (1.06486%), Total : 3099.
  * 2024-06-22: Some API updates, in particular `node_find_child_by_tag` now allows an optional `from` parameter. Minor parser improvements for some educations. Thanks to Nozdrum for suggestions. Tests: 3110, Passed: 2831, Failed: 279.
  * 2024-01-29: Initial release. Tests: 3111, Pass: 2818, Fail: 293
@@ -76,17 +77,19 @@ Note: The depth-first callback walker will visit children in the reverse order o
  * `xml_walk_depthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback)`
  * `xml_walk_breadthfirst :: (node: *XMLNode, callback: XMLNodeWalkCallback)`
  * `for_expansion :: (node: *XMLNode, body: Code, flags: For_Flags)`
+ 
+Note that `XMLNodeWalkCallback` functions should return `.Continue` to continue, `.Break` to stop descending, or
+either `.OnlyChildren` or `.OnlySiblings` to only continue to recurse children or siblings respectively. There is
+currently no mechanism to stop all iteration on the `xml_walk_depthfirst` or `xml_walk_breadthfirst` functions.
 
 ## Writing functions:
  * `xml_write :: (node: *XMLNode, indent_str := "  ") -> string`
-
 
 # TODO
 
  * [ ] Add support for ISO-8859
  * [ ] Add support for UTF-16
  * [ ] Improve speed of UTF-8 to UTF-32 conversion
- * [ ] Improve speed of Unicode character class matching
  * [ ] Add XPath support
 
 # Authors
