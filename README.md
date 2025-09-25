@@ -1,11 +1,12 @@
 # JXML
 
 This is an XML parser and DOM handling library for Jai.
-
+	
 # Versions
 
 Rather than using version numbers that mean practically nothing, we'll just log the dates of changes.
 
+ * 2025-09-25: Made `USE_SIMD_SEARCH` into a module parameter, eliminating `settings.jai`. It defaults to being on, as this results in a ~17% speedup. Added documentation. Fixes issue #5.
  * 2025-03-21: Updates for Jai 0.2.010, including %% -> \% in prints. Fixed bug in `for_expansion`. Resolved feature request [#4](https://github.com/smari/jai-xml/issues/4) on user data and stop condition for walk callbacks, thanks again valigo. Note: This changes the signature for `XMLNodeWalkCallback`, which can break your builds. Sorry about that. If this broke your build, please let me know, because I have no idea how many users this library has, so I don't know how important API stability is. In the future breaking changes will be made very carefully and incrementally, or avoided altogther. No changes to test coverage.
  * 2025-02-11: Fixed a few bugs in the for_expansion, and improved its documentation. Some other bugs had also been fixed in the interim. Thanks to valigo and caztanj for bug reports and fixes. Also updated parser and tests a bit. Now test results are: Passed: 3066 (98.935143%), Failed: 33 (1.06486%), Total : 3099.
  * 2024-06-22: Some API updates, in particular `node_find_child_by_tag` now allows an optional `from` parameter. Minor parser improvements for some educations. Thanks to Nozdrum for suggestions. Tests: 3110, Passed: 2831, Failed: 279.
@@ -33,6 +34,8 @@ To run the tests/benchmarks, compile `test.jai` and run. Benchmark numbers obtai
 ## Example use
 
 See examples in the `examples/` directory.
+
+Note that this module takes the module parameter `USE_SIMD_STRING_SEARCH`, which relies on x86-64 assembly. Set it to false to use this library on non-x86 architectures (e.g. modern Macs)
 
 ## Looping
 

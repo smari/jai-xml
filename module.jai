@@ -1,4 +1,4 @@
-
+#module_parameters () (USE_SIMD_STRING_SEARCH := true);
 
 XMLParseResult :: struct {
     status    : XMLParseStatus;
@@ -465,7 +465,6 @@ xml_write :: (node: *XMLNode, indent_str := "  ") -> string {
 
 #scope_file 
 
-#load "settings.jai";
 #load "parsing.jai";
 #load "unicode.jai";
 #load "dom.jai";

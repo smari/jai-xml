@@ -1,1 +1,0 @@
-USE_SIMD_STRING_SEARCH :: true;
