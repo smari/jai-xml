@@ -1,4 +1,4 @@
-#module_parameters () (USE_SIMD_STRING_SEARCH := true);
+#module_parameters(USE_SIMD_STRING_SEARCH := true);
 
 XMLParseResult :: struct {
     status    : XMLParseStatus;
