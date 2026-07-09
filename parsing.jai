@@ -107,7 +107,7 @@ find_substring_sse3 :: (haystack: string, needle: string) -> index: int, found: 
 
     if needle.count == 0  return 0, true;
     if needle.count == 1 {
-        index := find_index_from_left(haystack, <<needle.data);
+        index := find_index_from_left(haystack, needle.data.*);
         return index, index >= 0;
     }
     if haystack.count - needle.count < 0 return -1, false;
@@ -120,7 +120,7 @@ find_substring_sse3 :: (haystack: string, needle: string) -> index: int, found: 
     if haystack_ptr < end_simd {
         needle_buffer : [16] u8;
         needle_ptr := *needle_buffer;
-        memset(needle_ptr, <<needle.data, 16);
+        memset(needle_ptr, needle.data.*, 16);
 
         results : struct { index, found : u16; };
         results_data := *results;
@@ -151,7 +151,7 @@ find_substring_sse3 :: (haystack: string, needle: string) -> index: int, found: 
                 second_character_index := word_index + 1;
                 needle_index := needle.data + 1;
                 for character: second_character_index .. word_index + needle_end {
-                    if <<cast(*u8)character != <<needle_index {
+                    if (cast(*u8)character).* != needle_index.* {
                         haystack_ptr = second_character_index;
                         break;
                     }
@@ -169,7 +169,7 @@ find_substring_sse3 :: (haystack: string, needle: string) -> index: int, found: 
     for index: haystack_ptr .. end {
         needle_index := needle.data;
         for character: index .. index + needle_end {
-            if <<cast(*u8)character != <<needle_index
+            if (cast(*u8)character).* != needle_index.*
                 continue index;
             needle_index += 1;
         }
